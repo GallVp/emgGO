@@ -10,7 +10,10 @@ Currently, emgGO is being developed on macOS Mojave, MATLAB 2017b.
 ```
 $ git clone https://github.com/GallVp/emgGO
 ```
-2. From MATLAB file explorer, enter the emgGO folder by double clicking it. Follow the tutorials to experiment with the sample data.
+2. From MATLAB file explorer, enter the emgGO folder by double clicking it. Follow the [tutorials](https://github.com/GallVp/emgGO/tree/master/docs) to experiment with the sample data.
+
+## Tutorials
+Detailed tutorials are available [here](https://github.com/GallVp/emgGO/tree/master/docs).
 
 ## Overview
 emgGO is divided into three modules, (a) detection algorithms, (b) optimisation routines, and (c) graphics tools. This modular design is enforced with strictly defined protocols of information exchange across these modules. By following the defined protocols, new functionality can be added to a module without changing any code in the other modules. The structure along with their inter-connection is shown in below figure.

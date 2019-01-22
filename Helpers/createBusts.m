@@ -2,7 +2,7 @@ function [bustSignal] = createBusts(inSignal, fromOnsets, toOffsets)
 %createBusts
 %
 %
-%   Copyright (c) <2018> <Usman Rashid>
+%   Copyright (c) <2019> <Usman Rashid>
 %   Licensed under the MIT License. See LICENSE in the project root for
 %   license information.
 bustSignal = zeros(size(inSignal));
