@@ -1,0 +1,22 @@
+# Windows default autosave extension
+*.asv
+
+# OSX / *nix default autosave extension
+*.m~
+
+# Compiled MEX binaries (all platforms)
+*.mex*
+
+# Session info
+octave-workspace
+
+# Data-set folder
+data/*
+
+# R studio generated history
+.Rhistory
+
+# DS_Store banished
+.DS_Store
+
+
