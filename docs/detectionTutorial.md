@@ -1,9 +1,18 @@
 # How to detect onsets/offsets?
 
+<ul>
+    <li>
+        <a href="README.md">How to Use emgGO?</a>
+    </li>
+    <li>
+        <a href="importTutorial.md">How to import data in emgGO?</a>
+    </li>
+</ul>
+
 <p><a href="importTutorial.md">Import data</a> and run <code class="mcode">[resultEmg, optimalParams] = emgEventsDetectTool(EMG);</code> function.</p>
 
 <p align="center">
-<img alt="emgEventsDetectTool_labelled PNG image" src="../docs/figs/emgEventsDetectTool_labelled.png" height="auto" width="75%"/><hr>
+<img alt="emgEventsDetectTool_labelled PNG image" src="../docs/figs/emgEventsDetectTool_labelled.png" height="auto" width="50%"/><hr>
 <em>Fig 1. Data loaded in the <code>emgEventsDetectTool</code>.</em>
 </p>
 
@@ -15,7 +24,7 @@
 </p>
 
 <p align="center">
-<img alt="emgEventsDetectTool_desired PNG image" src="../docs/figs/emgEventsDetectTool_desired.png" height="auto" width="75%"/><hr>
+<img alt="emgEventsDetectTool_desired PNG image" src="../docs/figs/emgEventsDetectTool_desired.png" height="auto" width="50%"/><hr>
 <em>Fig 2. Results of Auto Find operation.</em>
 </p>
 
@@ -24,7 +33,7 @@
 To manually adjust the onsets/offsets, hit 'manual Adjust' button. This brings up the `emgEventsManageTool`. This tool can be used to insert, delete and move individual onsets/offsets.
 
 <p align="center">
-<img alt="emgEventsManageTool_example PNG image" src="../docs/figs/emgEventsManageTool_example.png" height="auto" width="75%"/><hr>
+<img alt="emgEventsManageTool_example PNG image" src="../docs/figs/emgEventsManageTool_example.png" height="auto" width="50%"/><hr>
 <em>Fig 3. <code>eventsManageTool</code> showing a single muscle activation interval with the onset, the offset and the selection highlighter.</em>
 </p>
 
