@@ -1,6 +1,6 @@
 # emgGO
 
-emgGO, which stands for electromyography, graphics and optimisation, is a toolbox which allows offline muscle activity onset/offset detection in multi-channel EMG data. Using the *nOptim* technique, the expected number of onsets/offsets can be automatically detected in the data. These onsets/offsets can be scrolled through and individually adjusted using GUI tools with keyboard shortcuts or the mouse pointer.
+emgGO, which stands for electromyography, graphics and optimisation, is a toolbox which allows offline muscle activity onset/offset detection in multi-channel EMG data.
 
 ## Compatibility
 Currently, emgGO is being developed on macOS Mojave, MATLAB 2017b.
@@ -22,6 +22,8 @@ emgGO is divided into three modules, (a) detection algorithms, (b) optimisation 
 <img alt="emgGO_SD PNG image" src="./docs/figs/emgGO_SD.png" height="auto" width="50%"/><hr>
 <em>Fig 1. The different modules of emgGO along with their inter-connections.</em>
 </p>
+
+Using the *nOptim* technique, the expected number of onsets/offsets can be automatically detected in the data. These onsets/offsets can be scrolled through and individually adjusted using GUI tools with keyboard shortcuts or the mouse pointer.
 
 ### Graphics Tools
 emgGO has two graphics tools, (1.) *emgEventsDetectTool and* (2.) *emgEventsManageTool*. *emgEventsDetectTool* displays the loaded data and automatically detects the onsets/offsets using the selected algorithm. It can be used to switch between channels, manually tune the detection algorithm with the ability to visually check the results of each step of the algorithm, and automatically find the expected number of onset/offset pairs using the *nOptim* technique. Its impression is shown in the figure below.
