@@ -1,6 +1,6 @@
 # emgGO
 
-emgGO, which stands for electromyography, graphics and optimisation, is a toolbox which allows offline muscle activity onset/offset detection in multi-channel EMG data. Using the *nOptim* technique, the expected number of onsets/offsets can be automatically detected in the data. These onsets/offsets can be scrolled through and individually adjusted using GUI tools with keyboard shortcuts or mouse pointer as convenient.
+emgGO, which stands for electromyography, graphics and optimisation, is a toolbox which allows offline muscle activity onset/offset detection in multi-channel EMG data. Using the *nOptim* technique, the expected number of onsets/offsets can be automatically detected in the data. These onsets/offsets can be scrolled through and individually adjusted using GUI tools with keyboard shortcuts or the mouse pointer.
 
 ## Compatibility
 Currently, emgGO is being developed on macOS Mojave, MATLAB 2017b.
@@ -14,19 +14,23 @@ $ git clone https://github.com/GallVp/emgGO
 
 ## Overview
 emgGO is divided into three modules, (a) detection algorithms, (b) optimisation routines, and (c) graphics tools. This modular design is enforced with strictly defined protocols of information exchange across these modules. By following the defined protocols, new functionality can be added to a module without changing any code in the other modules. The structure along with their inter-connection is shown in below figure.
+
 |![alt text](docs/figs/emgGO_SD.png)|
 |:--:|
-|**Fig. 1.** *The modules of emgGO along with their inter-connections.*|
+|**Fig. 1.** *The different modules of emgGO along with their inter-connections.*|
 
 ### Graphics Tools
 emgGO has two graphics tools, (1.) *emgEventsDetectTool and* (2.) *emgEventsManageTool*. *emgEventsDetectTool* displays the loaded data and automatically detects the onsets/offsets using the selected algorithm. It can be used to switch between channels, manually tune the detection algorithm with the ability to visually check the results of each step of the algorithm, and automatically find the expected number of onset/offset pairs using the *nOptim* technique. Its impression is shown in the figure below.
+
 |![alt text](docs/figs/emgGO_a.png)|
 |:--:|
-|**Fig. 2.** *emgEventsDetectTool of emgGO.*|
+|**Fig. 2.** *emgEventsDetectTool*|
+
 *emgEventsManageTool* can be used to scroll through individual onsets or offets. Both keyboard shortcuts and mouse pointer can be used to insert, delete, and move each event.
+
 |![alt text](docs/figs/emgGO_b.png)|
 |:--:|
-|**Fig. 3.** *emgEventsManageTool of emgGO.*|
+|**Fig. 3.** *emgEventsManageTool*|
 
 ## Third Party Libraries
 emgGO uses following third party libraries. The licenses for these libraries can be found next to source files in their respective libs/thirdpartlib folders.
