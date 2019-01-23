@@ -19,9 +19,8 @@
 <p>The EMG signal contains 56 muscle activations. However, in the bottom left corner of the tool, it shows that the algorithm has detected 55 onset/offset pairs. Furthermore, some of the activations have been detected incorrectly. The algorithm parameters can be manually optimised with live preview by increasing (+) or decreasing (-) its value. However, this manual tuning can take a long time. The following section describes how to automatically find correct number (56) of onset/offset pairs.</p>
 
 ## Auto Find Operation
-<p>
-    To automatically find correct number of onset/offset pairs, hit 'Auto Find' button. Enter the number of onset/offset pairs to find and click 'OK'. The *nOptim* optimizer runs in the background and it's progress can be viewed in MATLAB command window. The results are shown below. Now the algorithm has detected the desired number of onsets and offsets.
-</p>
+
+To automatically find correct number of onset/offset pairs, hit 'Auto Find' button. Enter the number of onset/offset pairs to find and click 'OK'. The *nOptim* optimizer runs in the background and it's progress can be viewed in MATLAB command window. The results are shown below. Now the algorithm has detected the desired number of onsets and offsets.
 
 <p align="center">
 <img alt="emgEventsDetectTool_desired PNG image" src="../docs/figs/emgEventsDetectTool_desired.png" height="auto" width="50%"/><hr>

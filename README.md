@@ -1,6 +1,6 @@
 # emgGO
 
-emgGO, which stands for electromyography, graphics and optimisation, is a toolbox which allows offline muscle activity onset/offset detection in multi-channel EMG data.
+emgGO (electromyography, graphics and optimisation) is a toolbox for offline muscle activity onset/offset detection in multi-channel EMG data.
 
 ## Compatibility
 Currently, emgGO is being developed on macOS Mojave, MATLAB 2017b.
@@ -16,12 +16,15 @@ $ git clone https://github.com/GallVp/emgGO
 Detailed tutorials are available [here](https://github.com/GallVp/emgGO/tree/master/docs).
 
 ## Overview
-emgGO is divided into three modules, (a) detection algorithms, (b) optimisation routines, and (c) graphics tools. This modular design is enforced with strictly defined protocols of information exchange across these modules. By following the defined protocols, new functionality can be added to a module without changing any code in the other modules. The structure along with their inter-connection is shown in below figure.
+emgGO is divided into three modules, (a) detection algorithms, (b) optimisation routines, and (c) graphics tools. This modular design is enforced with strictly defined protocols of information exchange across these modules. By following the defined protocols, new functionality can be added to a module without changing any code in the other modules. The modular structure along with their inter-connection is shown in below figure.
 
 <p align="center">
 <img alt="emgGO_SD PNG image" src="./docs/figs/emgGO_SD.png" height="auto" width="50%"/><hr>
 <em>Fig 1. The different modules of emgGO along with their inter-connections.</em>
 </p>
+
+### Algorithms and Optimisation
+Currently, emgGo has one detection algorithm and two optimisation routines. These are explained in the above cited publication. extendedDTA is an extended version of the double thresholding algorithm.
 
 Using the *nOptim* technique, the expected number of onsets/offsets can be automatically detected in the data. These onsets/offsets can be scrolled through and individually adjusted using GUI tools with keyboard shortcuts or the mouse pointer.
 
