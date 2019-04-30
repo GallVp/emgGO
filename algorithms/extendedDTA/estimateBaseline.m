@@ -1,6 +1,6 @@
-function [ baselineMean, baselineStd ] = estimateBaseline( inChannel, numSamples, baselineLevel)
+function [ baselineMean, baselineStd ] = estimateBaseline( inChannel, baselineLength, baselineLevel)
 %estimateBaseline Estimates baseline mean and std of length 'numSamples'
-%   for 'inChannel' using movsum function.
+%   for 'inChannel' using movmean function.
 %
 %
 %   Copyright (c) <2019> <Usman Rashid>
@@ -9,28 +9,26 @@ function [ baselineMean, baselineStd ] = estimateBaseline( inChannel, numSamples
 
 UNIQUE_TOL = 1/max(abs(inChannel)); % 1 unit of input signal.
 
-movSum = movsum(abs(inChannel), numSamples, 'Endpoints', 'discard');
-[~, IA, ~] = uniquetol(movSum, UNIQUE_TOL);
+movAvg = movmean(abs(inChannel), baselineLength, 'Endpoints', 'discard');
+[~, IA, ~] = uniquetol(movAvg, UNIQUE_TOL);
 
 % Discard can produce a signal of smaller length: LENGTH(X)-K+1
-indDiff = numSamples - 1;
+indDiff = length(inChannel) - length(movAvg);
 
 if baselineLevel > length(IA)
     startSampleNo = IA(end);
 else
-    startSampleNo = IA(baselineLevel);
+    startSampleNo = IA(baselineLevel) + indDiff/2;
 end
-interval = startSampleNo - floor(numSamples/2) + 1 : startSampleNo + floor(numSamples/2);
-interval = interval + indDiff;
+interval = startSampleNo - floor(baselineLength/2) + 1 : startSampleNo + floor(baselineLength/2);
 
 % In case of interval problems, return 0, 0
 try
-    signalBaseline = inChannel(interval);
-    baselineMean = mean(signalBaseline);
-    baselineStd = std(signalBaseline);
+    baselineSegment         = inChannel(interval);
+    baselineMean            = mean(abs(baselineSegment));
+    baselineStd             = std(abs(baselineSegment));
 catch
-    baselineMean = 0;
-    baselineStd = 0;
+    baselineMean            = 0;
+    baselineStd             = 0;
 end
-
 end

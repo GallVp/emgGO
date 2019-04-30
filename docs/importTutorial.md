@@ -37,7 +37,7 @@ The sample data can be plotted with `plotEMG(EMG);`. The results are shown in be
 
 The data is automatically rectified by the `plotEMG` function. This is the default behaviour of emgGO. Also, it does not filter the data and leaves the choice of appropriate filtering to the user. To filter the data, `filterStream` function can be used. The `filterStream` function is located in the *helpers* folder. It applies butterworth lowpass and highpass filters at provided cutoff frequencies.
 ```MATLAB
-EMG.channelData = filterStream(EMG.channelData = filterStream(EMG.channelData, EMG.fs, 2, 100, 10, 1);
+EMG.channelData = filterStream(EMG.channelData, EMG.fs, 2, 100, 10, 1);
 ```
 
 Typing *help filterStream* in MATLAB command window shows the following.
