@@ -11,7 +11,8 @@ function [ onSets, offSets ] =  extendedDTA(singleChannel, fs, optionsVector)
 % Round using frequency
 optionsVector = round(optionsVector .* fs) ./ fs;
 
-% Round EMG_BASELINE_LEVEL, EMG_EVENT_NUM_STDS, EMG_NON_TYPICAL_NUM_STDS
+% Round EMG_EVENT_NUM_STDS (2), EMG_BASELINE_LEVEL (3),
+% EMG_NON_TYPICAL_NUM_STDS (7)
 optionsVector(2) = round(optionsVector(2));
 optionsVector(3) = round(optionsVector(3));
 optionsVector(7) = round(optionsVector(7));
