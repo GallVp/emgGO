@@ -1,4 +1,4 @@
-# How to use emgGO?
+# How to Use emgGO?
 
 ## Contents:
 <ul>

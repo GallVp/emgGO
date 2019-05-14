@@ -1,4 +1,4 @@
-# How to detect onsets/offsets?
+# How to Detect Onsets/Offsets?
 
 ## Contents:
 

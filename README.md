@@ -13,13 +13,13 @@ Following tutorials are available.
 
 <ul>
     <li>
-        <a href="https://github.com/GallVp/emgGO/tree/master/docs/README.md">How to use emgGO?</a>
+        <a href="https://github.com/GallVp/emgGO/tree/master/docs/README.md">How to Use emgGO?</a>
     </li>
     <li>
-        <a href="https://github.com/GallVp/emgGO/tree/master/docs/importTutorial.md">How to import data in emgGO?</a>
+        <a href="https://github.com/GallVp/emgGO/tree/master/docs/importTutorial.md">How to Import Data in emgGO?</a>
     </li>
     <li>
-        <a href="https://github.com/GallVp/emgGO/tree/master/docs/detectionTutorial.md">How to detect onsets/offsets?</a>
+        <a href="https://github.com/GallVp/emgGO/tree/master/docs/detectionTutorial.md">How to Detect Onsets/Offsets?</a>
     </li>
 </ul>
 

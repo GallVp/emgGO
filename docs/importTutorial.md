@@ -1,4 +1,4 @@
-# How to import data in emgGO?
+# How to Import Data in emgGO?
 
 ## Contents:
 
