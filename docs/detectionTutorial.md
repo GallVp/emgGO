@@ -49,7 +49,7 @@ An onset or an offset can be deleted by first selecting it with a left mouse cli
 ### Efficient Manual Event Adjustment
 
 The above described method of select, delete and select, insert can be very slow. An efficient method for adjusting onsets is described in following steps. First, all detected onsets are adjusted. Second, all the detected offsets are adjusted. Then, missing onsets/offsets are inserted manually.
-<ul>
+<ol>
         <li>
             Scroll through the onsets using <em>leftarrow</em> and <em>rightarrow</em> keyboard keys.
         </li>
@@ -74,7 +74,7 @@ The above described method of select, delete and select, insert can be very slow
         <li>
             Once all detected onsets/offsets have been adjusted, hit <em>Channel View</em> button to open a window which show a simplified plot of EMG data with adjusted onsets and offsets. Find the time points where the onsets/offsets are missing. Go to the <em>emgEventsManageTool</em> and manually insert onsets/offsets at those points. <em>i</em> or <em>o</em> keys can be used to insert onset or offset at the highlighted point.
         </li>
-</ul>
+</ol>
 
 Once satisfied with the results, close this tool to go back to *emgEventsDetectTool*. The process of detecting and adjusting onsets/offsets is complete and the tool can be closed with results returned to MATLAB workspace.
 
