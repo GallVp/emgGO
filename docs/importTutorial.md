@@ -7,7 +7,7 @@
         <a href="README.md">How to Use emgGO?</a>
     </li>
     <li>
-        <a href="detectionTutorial.md">How to detect onsets/offsets?</a>
+        <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>
     </li>
 </ul>
 

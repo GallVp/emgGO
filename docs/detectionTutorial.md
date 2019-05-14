@@ -7,7 +7,7 @@
         <a href="README.md">How to Use emgGO?</a>
     </li>
     <li>
-        <a href="importTutorial.md">How to import data in emgGO?</a>
+        <a href="importTutorial.md">How to Import Data in emgGO?</a>
     </li>
 </ul>
 
@@ -16,7 +16,7 @@
 <p><a href="importTutorial.md">Import data</a> and run <code class="mcode">[resultEmg, optimalParams] = emgEventsDetectTool(EMG);</code> function.</p>
 
 <p align="center">
-<img alt="emgEventsDetectTool_labelled PNG image" src="../docs/figs/emgEventsDetectTool_labelled.png" height="auto" width="50%"/><hr>
+<img alt="emgEventsDetectTool_labelled PNG image" src="../docs/figs/emgEventsDetectTool_labelled.png" height="auto" width="75%"/><hr>
 <em>Fig 1. Data loaded in the <code>emgEventsDetectTool</code>.</em>
 </p>
 

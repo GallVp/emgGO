@@ -3,10 +3,10 @@
 ## Contents:
 <ul>
     <li>
-        <a href="importTutorial.md">How to import data in emgGO?</a>
+        <a href="importTutorial.md">How to Import Data in emgGO?</a>
     </li>
     <li>
-        <a href="detectionTutorial.md">How to detect onsets/offsets?</a>
+        <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>
     </li>
 </ul>
 
