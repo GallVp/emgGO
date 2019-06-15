@@ -7,6 +7,20 @@ emgGO (electromyography, graphics and optimisation) is a toolbox for offline mus
 <em>Fig 1. The GUI tools of emgGo which allow interactive processing of data.</em>
 </p>
 
+## Compatibility
+
+Currently emgGO is being developed on macOS Mojave, MATLAB 2017b.
+
+## Installation
+
+1. Clone the git repository using git. Or, download a compressed copy [here](https://codeload.github.com/GallVp/emgGO/zip/master).
+
+```
+$ git clone https://github.com/GallVp/emgGO
+```
+
+2. From MATLAB file explorer, enter the emgGO folder by double clicking it. Follow the [tutorials](https://github.com/GallVp/emgGO/tree/master/docs) to experiment with the sample data.
+
 ## Tutorials
 
 Following tutorials are available.
