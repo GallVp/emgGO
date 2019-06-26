@@ -7,6 +7,10 @@ emgGO (electromyography, graphics and optimisation) is a toolbox for offline mus
 <em>Fig 1. The GUI tools of emgGo which allow interactive processing of data.</em>
 </p>
 
+## Related Publications
+
+1. Optimal Automatic Detection of Muscle Activation Intervals, *Journal of Electromyography and Kinesiology*, doi: [10.1016/j.jelekin.2019.06.010](https://doi.org/10.1016/j.jelekin.2019.06.010)
+
 ## Compatibility
 
 Currently emgGO is being developed on macOS Mojave, MATLAB 2017b.
