@@ -1,6 +1,6 @@
 # How to Detect Onsets/Offsets?
 
-## Contents:
+## Tutorials:
 
 <ul>
     <li>
@@ -77,6 +77,54 @@ The above described method of select, delete and select, insert can be very slow
 </ol>
 
 Once satisfied with the results, close this tool to go back to *emgEventsDetectTool*. The process of detecting and adjusting onsets/offsets is complete and the tool can be closed with results returned to MATLAB workspace.
+
+#### Keyboard Shortcuts for emgEventsManageTool
+<table class="tut-table">
+        <tr>
+            <th>Key</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>&larr;, &rarr;</td>
+            <td>Scroll through the onsets/offsets. Once an event is selected, these keys move the selection highlighter.</td>
+        </tr>
+        <tr>
+            <td>&uarr;, &darr;</td>
+            <td>Zoom in/out along the verticle direction.</td>
+        </tr>
+        <tr>
+            <td>., /</td>
+            <td>Zoom in/out along the horizontal direction.</td>
+        </tr>
+        <tr>
+            <td>spacebar</td>
+            <td>Select current onset/offset. Once an event is selected, it moves the event to the current poition of the selection highlighter.</td>
+        </tr>
+        <tr>
+            <td>i, I</td>
+            <td>Insert onset at the current poition of the selection highlighter.</td>
+        </tr>
+        <tr>
+            <td>o, O</td>
+            <td>Insert offset at the current poition of the selection highlighter.</td>
+        </tr>
+        <tr>
+            <td>d, D</td>
+            <td>Delete currently selected onset/offset.</td>
+        </tr>
+        <tr>
+            <td>q, e</td>
+            <td>Fast move selection highlighter.</td>
+        </tr>
+        <tr>
+            <td>Esc</td>
+            <td>Remove the selection highlighter.</td>
+        </tr>
+        <tr>
+            <td>left-click</td>
+            <td>Insert selection highlighter at current position of the mouse. Only works if emg plot or onset/offset is clicked.</td>
+        </tr>
+</table>
 
 ## Auto Tune Parameters from Adjusted Onsets/Offsets
 

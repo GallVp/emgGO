@@ -1,6 +1,6 @@
 # How to Use emgGO?
 
-## Contents:
+## Tutorials:
 
 <ul>
     <li>
@@ -41,54 +41,6 @@ emgGO has two graphics tools, (1.) *emgEventsDetectTool* and (2.) *emgEventsMana
 <img alt="emgGO_b PNG image" src="../docs/figs/emgGO_b.png" height="auto" width="50%"/><hr>
 <em>Fig 3. emgEventsManageTool.</em>
 </p>
-
-#### Keyboard Shortcuts for emgEventsManageTool
-<table class="tut-table">
-        <tr>
-            <th>Key</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>&larr;, &rarr;</td>
-            <td>Scroll through the onsets/offsets. Once an event is selected, these keys move the selection highlighter.</td>
-        </tr>
-        <tr>
-            <td>&uarr;, &darr;</td>
-            <td>Zoom in/out along the verticle direction.</td>
-        </tr>
-        <tr>
-            <td>., /</td>
-            <td>Zoom in/out along the horizontal direction.</td>
-        </tr>
-        <tr>
-            <td>spacebar</td>
-            <td>Select current onset/offset. Once an event is selected, it moves the event to the current poition of the selection highlighter.</td>
-        </tr>
-        <tr>
-            <td>i, I</td>
-            <td>Insert onset at the current poition of the selection highlighter.</td>
-        </tr>
-        <tr>
-            <td>o, O</td>
-            <td>Insert offset at the current poition of the selection highlighter.</td>
-        </tr>
-        <tr>
-            <td>d, D</td>
-            <td>Delete currently selected onset/offset.</td>
-        </tr>
-        <tr>
-            <td>q, e</td>
-            <td>Fast move selection highlighter.</td>
-        </tr>
-        <tr>
-            <td>Esc</td>
-            <td>Remove the selection highlighter.</td>
-        </tr>
-        <tr>
-            <td>left-click</td>
-            <td>Insert selection highlighter at current position of the mouse. Only works if emg plot or onset/offset is clicked.</td>
-        </tr>
-</table>
     
 ## Known Issues
 Following problems are known and are being fixed.

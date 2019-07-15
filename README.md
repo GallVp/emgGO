@@ -27,8 +27,6 @@ $ git clone https://github.com/GallVp/emgGO
 
 ## Tutorials
 
-Following tutorials are available.
-
 <ul>
     <li>
         <a href="https://github.com/GallVp/emgGO/tree/master/docs/README.md">How to Use emgGO?</a>

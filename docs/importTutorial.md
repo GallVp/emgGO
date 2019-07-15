@@ -1,6 +1,6 @@
 # How to Import Data in emgGO?
 
-## Contents:
+## Tutorials:
 
 <ul>
     <li>
