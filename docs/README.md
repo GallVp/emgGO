@@ -1,4 +1,4 @@
-# How to Use emgGO?
+# emgGO: An Overview
 
 ## Tutorials:
 
@@ -8,6 +8,9 @@
     </li>
     <li>
         <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>
+    </li>
+    <li>
+        <a href="edtaExplained.md">The Extended Double Thresholding Algorithm</a>
     </li>
 </ul>
 

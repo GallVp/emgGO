@@ -1,7 +1,6 @@
 function [ resultCellArray ] =  extendedDTASteps(singleChannel, fs, optionsVector)
-%extendedDTASteps The sequence of options in the optionsVector the is same
-%   as listed in getDefaultOptions. This function provides step wise
-%   results as a cell array.
+%extendedDTASteps This function provides step wise results as a cell array
+% for the extendedDTA function.
 %
 %
 %   Copyright (c) <2019> <Usman Rashid>
@@ -13,7 +12,7 @@ resultCellArray = cell(length(optionsVector), 2);
 % Round using frequency
 optionsVector = round(optionsVector .* fs) ./ fs;
 
-% Round EMG_EVENT_NUM_STDS (2), EMG_BASELINE_LEVEL (3),
+% Round EMG_EVENT_NUM_STDS (2), EMG_BASELINE_RANK (3),
 % EMG_NON_TYPICAL_NUM_STDS (7)
 optionsVector(2) = round(optionsVector(2));
 optionsVector(3) = round(optionsVector(3));

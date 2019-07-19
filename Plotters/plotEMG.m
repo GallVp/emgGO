@@ -15,8 +15,9 @@ vars.options.xLabel           = {'Time (s)'};
 vars.options.yLabel           = 'Amplitude';
 vars.options.lineWidth        = 1;
 vars.options.markerLineWidth  = 1;
+vars.options.eventLineWidth   = 1;
+vars.options.eventMarkerSize  = 8;
 vars.options.applyDetrend     = 0;
-vars.options.showProcessed    = 1;
 vars.options.showRectifiedEmg = 1;
 
 switch(nargin)
@@ -35,11 +36,7 @@ vars.abscissa     = (1:vars.numSamples) ./ EMG.fs;
 % Initial settings
 vars.channelNum   = 1;
 vars.domain       = vars.DOMAIN_TIME;
-if(vars.options.showProcessed == 1 && isfield(vars.EMG, 'filteredChannelData'))
-    vars.channelStream= vars.EMG.filteredChannelData;
-else
-    vars.channelStream= vars.EMG.channelData;
-end
+vars.channelStream= vars.EMG.channelData;
 vars.fs           = vars.EMG.fs;
 vars.eventAmplitude = (max(vars.channelStream) - min(vars.channelStream)) / 4;
 
@@ -183,16 +180,22 @@ set(H, 'Visible','on');
             legendPlots = [];
         end
         
-        % Plot cue events if present
+        % Plot events are present
         if(isfield(vars.EMG, 'events') && strcmp(vars.domain, vars.DOMAIN_TIME))
-            if(~isempty(vars.EMG.events) && ~isempty(vars.EMG.events(vars.channelNum).onSets))
-                hold on
+            if(isfield(vars.EMG.events(vars.channelNum), 'onSets'))
+                hold on;
                 pOnSets = stem(absc(vars.EMG.events(vars.channelNum).onSets),...
                     vars.eventAmplitude(vars.channelNum)...
                     .* ones(size(absc(vars.EMG.events(vars.channelNum).onSets))),...
                     '-k', 'LineWidth', vars.options.eventLineWidth,...
                     'LineStyle', '--', 'Marker', '*',...
                     'MarkerSize', vars.options.eventMarkerSize);
+                hold off;
+                legendCell{end+1} = 'Onsets';
+                legendPlots(end+1)  = pOnSets(1);
+            end
+            if(isfield(vars.EMG.events(vars.channelNum), 'offSets'))
+                hold on;
                 pOffSets = stem(absc(vars.EMG.events(vars.channelNum).offSets),...
                     vars.eventAmplitude(vars.channelNum)...
                     .* ones(size(absc(vars.EMG.events(vars.channelNum).offSets))),...
@@ -200,8 +203,6 @@ set(H, 'Visible','on');
                     'LineStyle', '--', 'Marker', '*',...
                     'MarkerSize', vars.options.eventMarkerSize);
                 hold off;
-                legendCell{end+1} = 'Onsets';
-                legendPlots(end+1)  = pOnSets(1);
                 legendCell{end+1} = 'Offsets';
                 legendPlots(end+1)  = pOffSets(1);
             end

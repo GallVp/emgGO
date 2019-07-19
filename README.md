@@ -29,13 +29,16 @@ $ git clone https://github.com/GallVp/emgGO
 
 <ul>
     <li>
-        <a href="https://github.com/GallVp/emgGO/tree/master/docs/README.md">How to Use emgGO?</a>
+        <a href="https://github.com/GallVp/emgGO/tree/master/docs/README.md">emgGO: An Overview</a>
     </li>
     <li>
         <a href="https://github.com/GallVp/emgGO/tree/master/docs/importTutorial.md">How to Import Data in emgGO?</a>
     </li>
     <li>
         <a href="https://github.com/GallVp/emgGO/tree/master/docs/detectionTutorial.md">How to Detect Onsets/Offsets?</a>
+    </li>
+    <li>
+        <a href="https://github.com/GallVp/emgGO/tree/master/docs/edtaExplained.md">The Extended Double Thresholding Algorithm</a>
     </li>
 </ul>
 

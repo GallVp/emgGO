@@ -4,10 +4,13 @@
 
 <ul>
     <li>
-        <a href="README.md">How to Use emgGO?</a>
+        <a href="README.md">emgGO: An Overview</a>
     </li>
     <li>
         <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>
+    </li>
+    <li>
+        <a href="edtaExplained.md">The Extended Double Thresholding Algorithm</a>
     </li>
 </ul>
 
@@ -49,7 +52,7 @@ EMG.channelData = filterStream(EMG.channelData, EMG.fs, 2, 100, 10, 1);
 
 Typing *help filterStream* in MATLAB command window shows the following.
 
-```
+```MATLAB
 filterStream(data, fs, order, fcLow, fcHigh, zeroPhase)
     Applies low and high pass butterworth filter to a stream of data.
     
