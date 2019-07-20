@@ -57,7 +57,7 @@ The sEMG signal can be plotted as follows with the result shown in figure 1. Not
 
 **Signal Preprocessing:** The extended double thresholding algorithm does not filter the data itself. The choice of the appropriate filter is left to the user. The preprocessing was kept separate from the algorithm as different muscle signals may require very different preprocessing steps. Moreover, different researchers have different preferences for particular type and order of the filter. 
 
-n emgGo toolbox, a simple preprocessing function is available. This function *emgGo/helpers/filterStream.m* applies a low-pass and a high-pass Butterworth filter at selected cut off frequencies. The order and the application of MATLAB's zero-phase command `filtfilt` can be selected.
+In emgGo toolbox, a simple preprocessing function is available. This function *emgGo/helpers/filterStream.m* applies a low-pass and a high-pass Butterworth filter at selected cut off frequencies. The order and the application of MATLAB's zero-phase command `filtfilt` can be selected.
 
 The example sEMG signal plotted in figure 1 is filtered as follows with the result shown in figure 2. Note that the input of the *filterStream* function is the channel data and the sampling frequency, filter order equal to 2, low-pass cut off at 100 Hz, high-pass cut off at 10 Hz, and zero-phase flag equal to 1. The resultant signal is still unrectified.
 
@@ -74,7 +74,7 @@ The example sEMG signal plotted in figure 1 is filtered as follows with the resu
 <em>Fig 2. Plot of the filtered sample sEMG signal.</em>
 </p>
 
-**The `plotEMG` function:** emgGo toolbox also has a handy function for plotting the data. This function *emgGO/plotters/plotEMG* can automatically do a lot of things in the background such as assigning axis labels. The same plot as shown in figure 2 can be obtained as follows using `plotEMG` function with the result plotted in figure 3. Note the *showRectifiedEmg* flag is set to zero as by default the `plotEMG` function sets this flag to 1 and shows the rectified signal. The *yLabel* is also set to *Amplitude (uV)* as by default it is set to *Amplitude*. This function can also plot multi-channel data and has a number of additional features which we will see in action later.
+**The `plotEMG` function:** emgGo toolbox also a handy function for plotting the data. This function *emgGO/plotters/plotEMG* can automatically do a lot of things in the background such as assigning axis labels. The same plot as shown in figure 2 can be obtained as follows using `plotEMG` function with the result plotted in figure 3. Note the *showRectifiedEmg* flag is set to zero as by default the `plotEMG` function sets this flag to 1 and shows the rectified signal. The *yLabel* is also set to *Amplitude (uV)* as by default it is set to *Amplitude*. This function can also plot multi-channel data and has a number of additional features which we will see in action later.
 
 ```MATLAB
 >> options.showRectifiedEmg = 0;
@@ -114,7 +114,7 @@ function [onSets, offSets] =  extendedDTA(singleChannel, fs, optionsVector)
 %                  indices of the singleChannel.
 ```
 
-Let's assume that the following set of parameters is a good selection for the example sEMG signal plotted in figure 2. The selection of these parameters is based on intuition, past experiences and literature reading. These parameters have to be changed frequently. To get rid of this problem, *nOptim* method provided with the emgGo toolbox can be used. For details, see  <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>. Here, in order to explain the extended double thresholding algorithm, we have to select a specific set of parameters.
+Let's assume that the following set of parameters is a good selection for the sample sEMG signal plotted in figure 3. The selection of these parameters is based on intuition, past experiences and literature reading. These parameters have to be changed frequently. To get rid of this problem, *nOptim* method provided with the emgGo toolbox can be used. For details, see  <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>. Here, in order to explain the extended double thresholding algorithm, we have to select a specific set of parameters.
 
 ```MATLAB
 >> optionsVector = [0.1, 1, 1, 0.05, 0.05, 0.5, 2, 0];
@@ -190,7 +190,7 @@ Using the number of baseline standard deviations (Nsd) parameter the algorithm m
 </p>
 
 #### 3. Second threshold using on time
-The input of this operation is the `aboveBaselineEvents` vector. It consists of trains of 1's and 0's. 1's represent the signal samples which are `Nsd` standard deviations above the baseline mean. 0's represent the signal samples which are `Nsd` standard deviations below the baseline mean.
+The input of this operation is the `aboveBaselineEvents` vector. It consists of trains of 1's and 0's. 1's represent the signal samples which are `Nsd` standard deviations above the baseline mean.
 
 This operation takes these trains of 1's and only allow a train which lasts for at least `Ton` seconds. The first 1 of each train is marked as an onset and the last 1 is marked as an offset. The indices of these 1's are separated into two vectors: `onSets` for indices of onsets and `offSets` for indices of offsets. The result of this operation can be obtained and plotted as follows.
 
@@ -277,11 +277,11 @@ This operation finds the root mean square value (RMS) of each activation interva
 <em>Fig 8. Plot of the sample sEMG signal along with onsets and offsets resulting from the prune non-typical bursts operation.</em>
 </p>
 
-Looking at the results, it seems this operation has removed some the false positives which the previous operation could not. However, it has also removed an onset/offset pair which represented a legitimate muscle activation interval. This is the curse of automatic onset/offset detection. We can change the parameters of the algorithm to include the excluded activation interval but the set of parameters may result in a new problem. This motivated the *nOptim* method , explained in <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a> tutorial, which automatically selects the algorithm parameters and the only input required from the user is the number of activation bursts.
+Looking at the results, it seems this operation has removed the false positives which the previous operation could not. However, it has also removed an onset/offset pair which represented a legitimate muscle activation interval. This is the curse of automatic onset/offset detection. We can change the parameters of the algorithm to include the excluded activation interval but the new set of parameters may result in a new problem. This motivated the *nOptim* method , explained in <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a> tutorial, which automatically selects the algorithm parameters and the only input required from the user is the number of activation bursts.
 
 #### 7. Join movement components
 
-This operation is designed for situations when there are multiple discrete bursts resulting from a movement and these bursts must be represented by a single activation interval. In this case, this operation is not applied as the corresponding parameter's (`Tj`) value is set to 0. The algorithm only applies this operation is `Tj` is non-zero.
+This operation is designed for situations when there are multiple discrete bursts resulting from a movement and these bursts must be represented by a single activation interval. In this case, this operation is not applied as the corresponding parameter (`Tj`) is set to 0. The algorithm only applies this operation if `Tj` is non-zero.
 
 ```MATLAB
 if(optionsVector(8) > 0)
