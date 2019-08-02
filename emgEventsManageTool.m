@@ -72,7 +72,7 @@ end
 
 % Startup settings
 vars.channelNum           = 1;
-vars.eventMarkerY         = (max(vars.emgData) - min(vars.emgData)) / 4;
+vars.eventMarkerY         = (max(vars.emgData(:, vars.channelNum)) - min(vars.emgData(:, vars.channelNum))) / 4;
 vars.events               = vars.EMG.events;
 vars.onsetNum             = 1;
 vars.offsetNum            = 1;
@@ -465,9 +465,9 @@ uiwait(H);
         
         ax = subplot(1, 1, 1, 'Units', 'pixels', 'buttonDownfcn', @axesWhiteSpaceClicked, 'NextPlot', 'add');
         if(vars.options.showRectifiedEmg)
-            plot(vars.abscissa, abs(vars.emgData), 'buttonDownfcn', @highlightEvent, 'LineWidth', vars.options.lineWidth);
+            plot(vars.abscissa, abs(vars.emgData(:, vars.channelNum)), 'buttonDownfcn', @highlightEvent, 'LineWidth', vars.options.lineWidth);
         else
-            plot(vars.abscissa, vars.emgData, 'buttonDownfcn', @highlightEvent, 'LineWidth', vars.options.lineWidth);
+            plot(vars.abscissa, vars.emgData(:, vars.channelNum), 'buttonDownfcn', @highlightEvent, 'LineWidth', vars.options.lineWidth);
         end
         hold on;
         stem(vars.events(vars.channelNum).onSets ./ vars.fs, ones(length(vars.events(vars.channelNum).onSets), 1) .* vars.eventMarkerY,...
