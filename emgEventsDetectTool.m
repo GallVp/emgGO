@@ -278,15 +278,16 @@ uiwait(H);
 
     function autoFind(~, ~)
         dlgOpts.Interpreter='tex';
-        x = inputdlg({'No. of onset/offset pairs to find:'},...
-            'nOptim', [1 50], {'50'}, dlgOpts);
+        x = inputdlg({'No. of onset/offset pairs to find:', 'Randomise parameters [Y:1, N:0]'},...
+            'nOptim', [1 50], {'50', '1'}, dlgOpts);
         if(isempty(x))
             return;
         end
         answer = x;
         numActivations = round(str2double(answer{1}));
+        isRandomParams = str2double(answer{2});
         paramsVector = autoFindActivations(vars.channelStream(:, vars.channelNum), vars.fs,...
-            vars.detectionParams(:, vars.channelNum),...
+            isRandomParams, vars.detectionParams(:, vars.channelNum),...
             vars.options.paramLowerBounds, vars.options.paramUpperBounds,...
             numActivations, vars.options.detectionAlgo);
         vars.detectionParams(:, vars.channelNum) = vars.options.paramPrimer(paramsVector);
