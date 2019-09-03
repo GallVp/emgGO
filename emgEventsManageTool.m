@@ -72,7 +72,7 @@ end
 
 % Startup settings
 vars.channelNum           = 1;
-vars.eventMarkerY         = (max(vars.emgData(:, vars.channelNum)) - min(vars.emgData(:, vars.channelNum))) / 4;
+vars.eventMarkerY         = (max(vars.emgData) - min(vars.emgData)) / 4;
 vars.events               = vars.EMG.events;
 vars.onsetNum             = 1;
 vars.offsetNum            = 1;
@@ -470,12 +470,14 @@ uiwait(H);
             plot(vars.abscissa, vars.emgData(:, vars.channelNum), 'buttonDownfcn', @highlightEvent, 'LineWidth', vars.options.lineWidth);
         end
         hold on;
-        stem(vars.events(vars.channelNum).onSets ./ vars.fs, ones(length(vars.events(vars.channelNum).onSets), 1) .* vars.eventMarkerY,...
+        if ~isempty(vars.events(vars.channelNum).onSets)
+        stem(vars.events(vars.channelNum).onSets ./ vars.fs, ones(length(vars.events(vars.channelNum).onSets), 1) .* vars.eventMarkerY(vars.channelNum),...
             '-k', 'LineWidth', vars.options.eventLineWidth, 'LineStyle', '--', 'Marker', '*',...
             'MarkerSize', 10, 'buttonDownfcn', @highlightEvent);
-        stem(vars.events(vars.channelNum).offSets ./ vars.fs, ones(length(vars.events(vars.channelNum).offSets), 1) .* vars.eventMarkerY,...
+        stem(vars.events(vars.channelNum).offSets ./ vars.fs, ones(length(vars.events(vars.channelNum).offSets), 1) .* vars.eventMarkerY(vars.channelNum),...
             '-r', 'LineWidth', vars.options.eventLineWidth, 'LineStyle', '--', 'Marker', '*',...
             'MarkerSize', 10, 'buttonDownfcn', @highlightEvent);
+        end
         % Plot cue if present
         if(~isempty(vars.cueVector))
             plot(vars.options.cueVector ./ vars.fs,...
@@ -484,7 +486,7 @@ uiwait(H);
         end
         if(~isempty(vars.highlightPoint))
             vars.hHighlight = stem(vars.highlightPoint(1),...
-                vars.eventMarkerY, '-m', 'LineWidth', vars.options.lineWidth);
+                vars.eventMarkerY(vars.channelNum), '-m', 'LineWidth', vars.options.lineWidth);
             set(vars.btnInsertOn, 'Enable', 'On');
             set(vars.btnInsertOff, 'Enable', 'On');
         else
@@ -503,7 +505,7 @@ uiwait(H);
         % Reset zoom level
         if(retainZoom)
             axis(axisInfo);
-        else
+        elseif ~isempty(vars.events(vars.channelNum).onSets)
             axh = axis;
             dispWin = vars.options.dispWin .* vars.options.xAxisZoom;
             if(vars.options.scanOnsetsOffsets)
@@ -592,7 +594,7 @@ uiwait(H);
         end
         hold on;
         vars.hHighlight = stem(vars.highlightPoint(1),...
-            vars.eventMarkerY, '-m', 'LineWidth', vars.options.lineWidth);
+            vars.eventMarkerY(vars.channelNum), '-m', 'LineWidth', vars.options.lineWidth);
         hold off;
     end
     function closeFigure(~,~)

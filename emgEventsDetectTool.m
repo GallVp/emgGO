@@ -330,21 +330,21 @@ uiwait(H);
 
     function manualAdjust(~, ~)
         tempEMG = vars.EMG;
-        if(isfield(tempEMG, 'channelNames'))
-            tempEMG.channelNames = {tempEMG.channelNames{vars.channelNum}};
+        
+        for i=1:vars.numChannels
+            tempEMG.events(i).onSets  = vars.detectionCellarray{i}{end, vars.ONSETS_COLUMN_NUM};
+            tempEMG.events(i).offSets = vars.detectionCellarray{i}{end, vars.OFFSETS_COLUMN_NUM};
         end
-        tempEMG.channelData = tempEMG.channelData(:, vars.channelNum);
-        tempEMG.events.onSets  = vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM};
-        tempEMG.events.offSets = vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM};
-        if(isempty(tempEMG.events.offSets))
+        if(isempty(tempEMG.events))
             errordlg('No onsets and offsets to adjust', 'Manual Adjust Error', 'modal');
             return;
         end
         adjustedEMG = emgEventsManageTool(tempEMG, vars.options);
-        vars.uOnSets      = setdiff(adjustedEMG.events.onSets, vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM});
-        vars.uOffSets    = setdiff(adjustedEMG.events.offSets, vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM});
-        vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM} = adjustedEMG.events.onSets;
-        vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM} = adjustedEMG.events.offSets;
+        for i=1:vars.numChannels
+            
+            vars.detectionCellarray{i}{end, vars.ONSETS_COLUMN_NUM} = adjustedEMG.events(i).onSets;
+            vars.detectionCellarray{i}{end, vars.OFFSETS_COLUMN_NUM} = adjustedEMG.events(i).offSets;
+        end
         updateView(1);
     end
 
