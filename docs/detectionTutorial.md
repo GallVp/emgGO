@@ -88,6 +88,10 @@ Once satisfied with the results, close this tool to go back to *emgEventsDetectT
             <th>Description</th>
         </tr>
         <tr>
+            <td>Shift + &larr;, &rarr;</td>
+            <td>Scroll through the channels.</td>
+        </tr>
+        <tr>
             <td>&larr;, &rarr;</td>
             <td>Scroll through the onsets/offsets. Once an event is selected, these keys move the selection highlighter.</td>
         </tr>
