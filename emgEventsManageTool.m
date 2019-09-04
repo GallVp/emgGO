@@ -116,47 +116,60 @@ set(H, 'pos', windowPosition);
 
 % Create push buttons
 vars.btnNext = uicontrol('Style', 'pushbutton', 'String', 'Next',...
+    'TooltipString', 'Next event',...
     'Position', [300 60 75 20],...
     'Callback', @next);
 
 vars.btnPrevious = uicontrol('Style', 'pushbutton', 'String', 'Previous',...
+    'TooltipString', 'Previous parameter',...
     'Position', [200 60 75 20],...
     'Callback', @previous);
 
 % Create channel push buttons
 vars.btnNextChannel = uicontrol('Style', 'pushbutton', 'String', '>>',...
+    'TooltipString', 'Next channel',...
     'Position', [450 60 25 20],...
-    'Callback', @nextChannel);
+    'Callback', @nextChannel,...
+    'KeyPressFcn',      @keyPressHandler);
 
 vars.btnPreviousChannel = uicontrol('Style', 'pushbutton', 'String', '<<',...
+    'TooltipString', 'Previous channel',...
     'Position', [400 60 25 20],...
-    'Callback', @previousChannel);
+    'Callback', @previousChannel,...
+    'KeyPressFcn',      @keyPressHandler);
 
 vars.btnReset = uicontrol('Style', 'pushbutton', 'String', 'Reset',...
+    'TooltipString', 'Reset events',...
     'Position', [500 60 75 20],...
     'Callback', @reset);
 
 vars.btnDelete = uicontrol('Style', 'pushbutton', 'String', 'Delete',...
+    'TooltipString', 'Delete events',...
     'Position', [200 20 75 20],...
     'Callback', @delEvent);
 
 vars.btnInsertOn = uicontrol('Style', 'pushbutton', 'String', 'Ins Onset',...
+    'TooltipString', 'Insert onset',...
     'Position', [300 20 75 20],...
     'Callback', @instOnEvent);
 
 vars.btnInsertOff = uicontrol('Style', 'pushbutton', 'String', 'Ins Offset',...
+    'TooltipString', 'Insert offset',...
     'Position', [400 20 75 20],...
     'Callback', @instOffEvent);
 
 vars.btnMoveEvent = uicontrol('Style', 'pushbutton', 'String', 'Move',...
+    'TooltipString', 'Move event',...
     'Position', [500 20 75 20],...
     'Callback', @moveEvent);
 
 vars.btnChannelView = uicontrol('Style', 'pushbutton', 'String', 'Channel View',...
+    'TooltipString', 'Open channel viewer',...
     'Position', [600 60 75 20],...
     'Callback', @channelView);
 
 vars.btnScanOnsetsOffsets = uicontrol('Style', 'pushbutton', 'String', 'Scan Offsets',...
+    'TooltipString', 'Toggle event scan',...
     'Position', [600 20 75 20],...
     'Callback', @scanOnsetsOffsets);
 
@@ -173,7 +186,7 @@ set(H, 'Visible','on');
 uiwait(H);
 
 % Handle callbacks
-    function next(~,~)
+    function next(hObject,~)
         if(vars.options.scanOnsetsOffsets)
             vars.offsetNum = vars.offsetNum + 1;
         else
@@ -182,9 +195,13 @@ uiwait(H);
         vars.highlightPoint = [];
         vars.selectedEvent = [];
         eventScroll;
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
-    function previous(~,~)
+    function previous(hObject,~)
         if(vars.options.scanOnsetsOffsets)
             vars.offsetNum = vars.offsetNum - 1;
         else
@@ -193,9 +210,13 @@ uiwait(H);
         vars.highlightPoint = [];
         vars.selectedEvent = [];
         eventScroll;
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
-    function nextChannel(~,~)
+    function nextChannel(hObject,~)
         vars.channelNum = vars.channelNum + 1;
         vars.highlightPoint = [];
         vars.selectedEvent = [];
@@ -208,9 +229,13 @@ uiwait(H);
             vars.offsetNum = 1;
         end
         updateView
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
-    function previousChannel(~,~)
+    function previousChannel(hObject,~)
         vars.channelNum = vars.channelNum - 1;
         vars.highlightPoint = [];
         vars.selectedEvent = [];
@@ -223,9 +248,13 @@ uiwait(H);
             vars.offsetNum = 1;
         end
         updateView
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
-    function reset(~,~)
+    function reset(hObject,~)
         vars.events(vars.channelNum).onSets = vars.EMG.events(vars.channelNum).onSets;
         vars.events(vars.channelNum).offSets = vars.EMG.events(vars.channelNum).offSets;
         vars.onsetNum = 1;
@@ -235,6 +264,10 @@ uiwait(H);
         vars.numOnsets = length(vars.events(vars.channelNum).onSets);
         vars.numOffsets = length(vars.events(vars.channelNum).offSets);
         updateView
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
 
@@ -268,7 +301,7 @@ uiwait(H);
         updateView(1);
     end
 
-    function delEvent(~, ~)
+    function delEvent(hObject, ~)
         if(~isempty(vars.highlightPoint) && strcmp(vars.selectedEvent.type, vars.EVENT_TYPE_ONSET))
             vars.events(vars.channelNum).onSets(vars.selectedEvent.location...
                 == vars.events(vars.channelNum).onSets) = [];
@@ -292,9 +325,13 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
-    function moveEvent(~, ~)
+    function moveEvent(hObject, ~)
         if(~isempty(vars.highlightPoint) && strcmp(vars.selectedEvent.type, vars.EVENT_TYPE_ONSET))
             vars.events(vars.channelNum).onSets(vars.selectedEvent.location == vars.events(vars.channelNum).onSets) = [];
             vars.events(vars.channelNum).onSets = sort([vars.events(vars.channelNum).onSets;round(vars.highlightPoint(1) .* vars.fs)]);
@@ -310,6 +347,10 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
     function axesWhiteSpaceClicked(~, ~)
@@ -318,7 +359,7 @@ uiwait(H);
         updateView(1);
     end
 
-    function instOnEvent(~, ~)
+    function instOnEvent(hObject, ~)
         if(~isempty(vars.highlightPoint))
             vars.events(vars.channelNum).onSets = sort([vars.events(vars.channelNum).onSets;round(vars.highlightPoint(1) .* vars.fs)]);
             vars.numOnsets = length(vars.events(vars.channelNum).onSets);
@@ -326,8 +367,12 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
-    function instOffEvent(~, ~)
+    function instOffEvent(hObject, ~)
         if(~isempty(vars.highlightPoint))
             vars.events(vars.channelNum).offSets = sort([vars.events(vars.channelNum).offSets;round(vars.highlightPoint(1) .* vars.fs)]);
             vars.numOffsets = length(vars.events(vars.channelNum).offSets);
@@ -335,116 +380,133 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
     function keyPressHandler(~, eventData)
-        if(~isempty(vars.highlightPoint))
-            axisLimits = axis;
-            movSamples = round(vars.options.highlightMoveSpeed * abs(axisLimits(2) - axisLimits(1)));
-            if(movSamples == 0)
-                movSamples = 1;
+        if ~isempty(eventData.Modifier)
+            if(strcmp(eventData.Key, 'rightarrow') && strcmp(eventData.Modifier{1}, 'shift') && vars.channelNum < vars.numChannels)
+                nextChannel([], []);
             end
-            if(strcmp(eventData.Key, 'rightarrow'))
-                vars.highlightPoint(1) = vars.highlightPoint(1) + movSamples / vars.fs;
-                moveHighlighter;
-            end
-            if(strcmp(eventData.Key, 'leftarrow'))
-                vars.highlightPoint(1) = vars.highlightPoint(1) - movSamples / vars.fs;
-                moveHighlighter;
-            end
-            if(strcmp(eventData.Key, 'e') || strcmp(eventData.Key, 'E'))
-                vars.highlightPoint(1) = vars.highlightPoint(1) + (movSamples * 5) / vars.fs;
-                moveHighlighter;
-            end
-            if(strcmp(eventData.Key, 'q') || strcmp(eventData.Key, 'Q'))
-                vars.highlightPoint(1) = vars.highlightPoint(1) - (movSamples * 5) / vars.fs;
-                moveHighlighter;
-            end
-            if(strcmp(eventData.Key, 'uparrow'))
-                vars.eventMarkerY = vars.eventMarkerY / 1.25;
-                vars.options.yAxisZoom = vars.options.yAxisZoom / 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'downarrow'))
-                vars.eventMarkerY = vars.eventMarkerY * 1.25;
-                vars.options.yAxisZoom = vars.options.yAxisZoom * 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'slash'))
-                vars.options.xAxisZoom = vars.options.xAxisZoom / 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'period'))
-                vars.options.xAxisZoom = vars.options.xAxisZoom * 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'escape'))
-                axesWhiteSpaceClicked([], []);
-            end
-            if(strcmp(eventData.Key, 'space') && ~isempty(vars.selectedEvent))
-                moveEvent([], []);
-            end
-            if(strcmp(eventData.Key, 'd') || strcmp(eventData.Key, 'D') && ~isempty(vars.selectedEvent))
-                delEvent([], []);
-            end
-            if(strcmp(eventData.Key, 'i') || strcmp(eventData.Key, 'I'))
-                instOnEvent([], []);
-            end
-            if(strcmp(eventData.Key, 'o') || strcmp(eventData.Key, 'O'))
-                instOffEvent([], []);
+            if(strcmp(eventData.Key, 'leftarrow') && strcmp(eventData.Modifier{1}, 'shift') && vars.channelNum > 1)
+                previousChannel([], []);
             end
         else
-            if(vars.options.scanOnsetsOffsets)
-                if(strcmp(eventData.Key, 'rightarrow') && vars.offsetNum < vars.numOffsets)
-                    next([], []);
+            if(~isempty(vars.highlightPoint))
+                axisLimits = axis;
+                movSamples = round(vars.options.highlightMoveSpeed * abs(axisLimits(2) - axisLimits(1)));
+                if(movSamples == 0)
+                    movSamples = 1;
                 end
-                if(strcmp(eventData.Key, 'leftarrow') && vars.offsetNum > 1)
-                    previous([], []);
+                if(strcmp(eventData.Key, 'rightarrow'))
+                    vars.highlightPoint(1) = vars.highlightPoint(1) + movSamples / vars.fs;
+                    moveHighlighter;
                 end
-                if(strcmp(eventData.Key, 'space') && isempty(vars.selectedEvent))
-                    callbackdata.IntersectionPoint = vars.events(vars.channelNum).offSets(vars.offsetNum) / vars.fs;
-                    highlightEvent([], callbackdata);
+                if(strcmp(eventData.Key, 'leftarrow'))
+                    vars.highlightPoint(1) = vars.highlightPoint(1) - movSamples / vars.fs;
+                    moveHighlighter;
+                end
+                if(strcmp(eventData.Key, 'e') || strcmp(eventData.Key, 'E'))
+                    vars.highlightPoint(1) = vars.highlightPoint(1) + (movSamples * 5) / vars.fs;
+                    moveHighlighter;
+                end
+                if(strcmp(eventData.Key, 'q') || strcmp(eventData.Key, 'Q'))
+                    vars.highlightPoint(1) = vars.highlightPoint(1) - (movSamples * 5) / vars.fs;
+                    moveHighlighter;
+                end
+                if(strcmp(eventData.Key, 'uparrow'))
+                    vars.eventMarkerY = vars.eventMarkerY / 1.25;
+                    vars.options.yAxisZoom = vars.options.yAxisZoom / 1.25;
+                    updateView;
+                end
+                if(strcmp(eventData.Key, 'downarrow'))
+                    vars.eventMarkerY = vars.eventMarkerY * 1.25;
+                    vars.options.yAxisZoom = vars.options.yAxisZoom * 1.25;
+                    updateView;
+                end
+                if(strcmp(eventData.Key, 'slash'))
+                    vars.options.xAxisZoom = vars.options.xAxisZoom / 1.25;
+                    updateView;
+                end
+                if(strcmp(eventData.Key, 'period'))
+                    vars.options.xAxisZoom = vars.options.xAxisZoom * 1.25;
+                    updateView;
+                end
+                if(strcmp(eventData.Key, 'escape'))
+                    axesWhiteSpaceClicked([], []);
+                end
+                if(strcmp(eventData.Key, 'space') && ~isempty(vars.selectedEvent))
+                    moveEvent([], []);
+                end
+                if(strcmp(eventData.Key, 'd') || strcmp(eventData.Key, 'D') && ~isempty(vars.selectedEvent))
+                    delEvent([], []);
+                end
+                if(strcmp(eventData.Key, 'i') || strcmp(eventData.Key, 'I'))
+                    instOnEvent([], []);
+                end
+                if(strcmp(eventData.Key, 'o') || strcmp(eventData.Key, 'O'))
+                    instOffEvent([], []);
                 end
             else
-                if(strcmp(eventData.Key, 'rightarrow') && vars.onsetNum < vars.numOnsets)
-                    next([], []);
+                if(vars.options.scanOnsetsOffsets)
+                    if(strcmp(eventData.Key, 'rightarrow') && vars.offsetNum < vars.numOffsets)
+                        next([], []);
+                    end
+                    if(strcmp(eventData.Key, 'leftarrow') && vars.offsetNum > 1)
+                        previous([], []);
+                    end
+                    if(strcmp(eventData.Key, 'space') && isempty(vars.selectedEvent))
+                        callbackdata.IntersectionPoint = vars.events(vars.channelNum).offSets(vars.offsetNum) / vars.fs;
+                        highlightEvent([], callbackdata);
+                    end
+                else
+                    if(strcmp(eventData.Key, 'rightarrow') && vars.onsetNum < vars.numOnsets)
+                        next([], []);
+                    end
+                    if(strcmp(eventData.Key, 'leftarrow') && vars.onsetNum > 1)
+                        previous([], []);
+                    end
+                    if(strcmp(eventData.Key, 'space') && isempty(vars.selectedEvent))
+                        callbackdata.IntersectionPoint = vars.events(vars.channelNum).onSets(vars.onsetNum) / vars.fs;
+                        highlightEvent([], callbackdata);
+                    end
                 end
-                if(strcmp(eventData.Key, 'leftarrow') && vars.onsetNum > 1)
-                    previous([], []);
+                if(strcmp(eventData.Key, 'uparrow'))
+                    vars.eventMarkerY = vars.eventMarkerY / 1.25;
+                    vars.options.yAxisZoom = vars.options.yAxisZoom / 1.25;
+                    updateView;
                 end
-                if(strcmp(eventData.Key, 'space') && isempty(vars.selectedEvent))
-                    callbackdata.IntersectionPoint = vars.events(vars.channelNum).onSets(vars.onsetNum) / vars.fs;
-                    highlightEvent([], callbackdata);
+                if(strcmp(eventData.Key, 'downarrow'))
+                    vars.eventMarkerY = vars.eventMarkerY * 1.25;
+                    vars.options.yAxisZoom = vars.options.yAxisZoom * 1.25;
+                    updateView;
                 end
-            end
-            if(strcmp(eventData.Key, 'uparrow'))
-                vars.eventMarkerY = vars.eventMarkerY / 1.25;
-                vars.options.yAxisZoom = vars.options.yAxisZoom / 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'downarrow'))
-                vars.eventMarkerY = vars.eventMarkerY * 1.25;
-                vars.options.yAxisZoom = vars.options.yAxisZoom * 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'slash'))
-                vars.options.xAxisZoom = vars.options.xAxisZoom / 1.25;
-                updateView;
-            end
-            if(strcmp(eventData.Key, 'period'))
-                vars.options.xAxisZoom = vars.options.xAxisZoom * 1.25;
-                updateView;
+                if(strcmp(eventData.Key, 'slash'))
+                    vars.options.xAxisZoom = vars.options.xAxisZoom / 1.25;
+                    updateView;
+                end
+                if(strcmp(eventData.Key, 'period'))
+                    vars.options.xAxisZoom = vars.options.xAxisZoom * 1.25;
+                    updateView;
+                end
             end
         end
     end
 
-    function channelView(~, ~)
+    function channelView(hObject, ~)
         tempEMG = vars.EMG;
         tempEMG.events = vars.events;
         plotEMG(tempEMG, vars.options);
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
-    function scanOnsetsOffsets(~, ~)
+    function scanOnsetsOffsets(hObject, ~)
         if(vars.options.scanOnsetsOffsets)
             vars.options.scanOnsetsOffsets = 0;
             set(vars.btnScanOnsetsOffsets, 'String', 'Scan Offsets');
@@ -453,6 +515,10 @@ uiwait(H);
             set(vars.btnScanOnsetsOffsets, 'String', 'Scan Onsets');
         end
         eventScroll;
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
     end
 
     function updateView(retainZoom)
@@ -471,12 +537,12 @@ uiwait(H);
         end
         hold on;
         if ~isempty(vars.events(vars.channelNum).onSets)
-        stem(vars.events(vars.channelNum).onSets ./ vars.fs, ones(length(vars.events(vars.channelNum).onSets), 1) .* vars.eventMarkerY(vars.channelNum),...
-            '-k', 'LineWidth', vars.options.eventLineWidth, 'LineStyle', '--', 'Marker', '*',...
-            'MarkerSize', 10, 'buttonDownfcn', @highlightEvent);
-        stem(vars.events(vars.channelNum).offSets ./ vars.fs, ones(length(vars.events(vars.channelNum).offSets), 1) .* vars.eventMarkerY(vars.channelNum),...
-            '-r', 'LineWidth', vars.options.eventLineWidth, 'LineStyle', '--', 'Marker', '*',...
-            'MarkerSize', 10, 'buttonDownfcn', @highlightEvent);
+            stem(vars.events(vars.channelNum).onSets ./ vars.fs, ones(length(vars.events(vars.channelNum).onSets), 1) .* vars.eventMarkerY(vars.channelNum),...
+                '-k', 'LineWidth', vars.options.eventLineWidth, 'LineStyle', '--', 'Marker', '*',...
+                'MarkerSize', 10, 'buttonDownfcn', @highlightEvent);
+            stem(vars.events(vars.channelNum).offSets ./ vars.fs, ones(length(vars.events(vars.channelNum).offSets), 1) .* vars.eventMarkerY(vars.channelNum),...
+                '-r', 'LineWidth', vars.options.eventLineWidth, 'LineStyle', '--', 'Marker', '*',...
+                'MarkerSize', 10, 'buttonDownfcn', @highlightEvent);
         end
         % Plot cue if present
         if(~isempty(vars.cueVector))

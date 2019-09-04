@@ -126,6 +126,7 @@ updateLists;
         if(isempty(ouputFolderFiles))
             set(vars.pbDelete, 'Enable', 'Off');
             set(vars.pbViewPipe, 'Enable', 'Off');
+            set(vars.pbEditPipe, 'Enable', 'Off');
         else
             set(vars.pbDelete, 'Enable', 'On');
             if(isempty(vars.viewPipe))

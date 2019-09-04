@@ -44,10 +44,3 @@ emgGO has two graphics tools, (1.) *emgEventsDetectTool* and (2.) *emgEventsMana
 <img alt="emgGO_b PNG image" src="../docs/figs/emgGO_b.png" height="auto" width="50%"/><hr>
 <em>Fig 3. emgEventsManageTool.</em>
 </p>
-    
-## Known Issues
-Following problems are known and are being fixed.
-<ol>
-    <li>Keyboard shortcuts do not work after pressing a button in emgEventsManageTool.</li>
-    <p>The solution is to click on the gray area in the window after pressing a button. The cause of the problem is that MATLAB does not return the focus back to the main window once a button is pressed. Hopefully, it will be fixed in a future version of MATLAB.</p>
-</ol>
