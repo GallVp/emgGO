@@ -12,6 +12,9 @@
     <li>
         <a href="detectionTutorial.md">How to Detect Onsets/Offsets?</a>
     </li>
+    <li>
+        <a href="pipelineTutorial.md">How to Create a Processing Pipeline?</a>
+    </li>
 </ul>
 
 ## Research behind the Extended Double Thresholding Algorithm (eDTA)

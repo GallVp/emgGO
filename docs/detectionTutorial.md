@@ -10,6 +10,9 @@
         <a href="importTutorial.md">How to Import Data in emgGO?</a>
     </li>
     <li>
+        <a href="pipelineTutorial.md">How to Create a Processing Pipeline?</a>
+    </li>
+    <li>
         <a href="edtaExplained.md">The Extended Double Thresholding Algorithm</a>
     </li>
 </ul>
