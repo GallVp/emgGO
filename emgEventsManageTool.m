@@ -129,14 +129,12 @@ vars.btnPrevious = uicontrol('Style', 'pushbutton', 'String', 'Previous',...
 vars.btnNextChannel = uicontrol('Style', 'pushbutton', 'String', '>>',...
     'TooltipString', 'Next channel',...
     'Position', [450 60 25 20],...
-    'Callback', @nextChannel,...
-    'KeyPressFcn',      @keyPressHandler);
+    'Callback', @nextChannel);
 
 vars.btnPreviousChannel = uicontrol('Style', 'pushbutton', 'String', '<<',...
     'TooltipString', 'Previous channel',...
     'Position', [400 60 25 20],...
-    'Callback', @previousChannel,...
-    'KeyPressFcn',      @keyPressHandler);
+    'Callback', @previousChannel);
 
 vars.btnReset = uicontrol('Style', 'pushbutton', 'String', 'Reset',...
     'TooltipString', 'Reset events',...
@@ -187,6 +185,11 @@ uiwait(H);
 
 % Handle callbacks
     function next(hObject,~)
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
+        
         if(vars.options.scanOnsetsOffsets)
             vars.offsetNum = vars.offsetNum + 1;
         else
@@ -195,13 +198,14 @@ uiwait(H);
         vars.highlightPoint = [];
         vars.selectedEvent = [];
         eventScroll;
+    end
+
+    function previous(hObject,~)
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
-    end
-
-    function previous(hObject,~)
+        
         if(vars.options.scanOnsetsOffsets)
             vars.offsetNum = vars.offsetNum - 1;
         else
@@ -210,13 +214,14 @@ uiwait(H);
         vars.highlightPoint = [];
         vars.selectedEvent = [];
         eventScroll;
+    end
+
+    function nextChannel(hObject,~)
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
-    end
-
-    function nextChannel(hObject,~)
+        
         vars.channelNum = vars.channelNum + 1;
         vars.highlightPoint = [];
         vars.selectedEvent = [];
@@ -229,13 +234,14 @@ uiwait(H);
             vars.offsetNum = 1;
         end
         updateView
+    end
+
+    function previousChannel(hObject,~)
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
-    end
-
-    function previousChannel(hObject,~)
+        
         vars.channelNum = vars.channelNum - 1;
         vars.highlightPoint = [];
         vars.selectedEvent = [];
@@ -248,13 +254,14 @@ uiwait(H);
             vars.offsetNum = 1;
         end
         updateView
+    end
+
+    function reset(hObject,~)
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
-    end
-
-    function reset(hObject,~)
+        
         vars.events(vars.channelNum).onSets = vars.EMG.events(vars.channelNum).onSets;
         vars.events(vars.channelNum).offSets = vars.EMG.events(vars.channelNum).offSets;
         vars.onsetNum = 1;
@@ -264,10 +271,6 @@ uiwait(H);
         vars.numOnsets = length(vars.events(vars.channelNum).onSets);
         vars.numOffsets = length(vars.events(vars.channelNum).offSets);
         updateView
-        % To put focus back to main GUI
-        set(hObject, 'enable', 'off');
-        drawnow;
-        set(hObject, 'enable', 'on');
     end
 
 
@@ -302,6 +305,11 @@ uiwait(H);
     end
 
     function delEvent(hObject, ~)
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
+        
         if(~isempty(vars.highlightPoint) && strcmp(vars.selectedEvent.type, vars.EVENT_TYPE_ONSET))
             vars.events(vars.channelNum).onSets(vars.selectedEvent.location...
                 == vars.events(vars.channelNum).onSets) = [];
@@ -325,13 +333,14 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
+    end
+
+    function moveEvent(hObject, ~)
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
-    end
-
-    function moveEvent(hObject, ~)
+        
         if(~isempty(vars.highlightPoint) && strcmp(vars.selectedEvent.type, vars.EVENT_TYPE_ONSET))
             vars.events(vars.channelNum).onSets(vars.selectedEvent.location == vars.events(vars.channelNum).onSets) = [];
             vars.events(vars.channelNum).onSets = sort([vars.events(vars.channelNum).onSets;round(vars.highlightPoint(1) .* vars.fs)]);
@@ -347,10 +356,6 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
-        % To put focus back to main GUI
-        set(hObject, 'enable', 'off');
-        drawnow;
-        set(hObject, 'enable', 'on');
     end
 
     function axesWhiteSpaceClicked(~, ~)
@@ -360,6 +365,11 @@ uiwait(H);
     end
 
     function instOnEvent(hObject, ~)
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
+        
         if(~isempty(vars.highlightPoint))
             vars.events(vars.channelNum).onSets = sort([vars.events(vars.channelNum).onSets;round(vars.highlightPoint(1) .* vars.fs)]);
             vars.numOnsets = length(vars.events(vars.channelNum).onSets);
@@ -367,12 +377,13 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
+    end
+    function instOffEvent(hObject, ~)
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
-    end
-    function instOffEvent(hObject, ~)
+        
         if(~isempty(vars.highlightPoint))
             vars.events(vars.channelNum).offSets = sort([vars.events(vars.channelNum).offSets;round(vars.highlightPoint(1) .* vars.fs)]);
             vars.numOffsets = length(vars.events(vars.channelNum).offSets);
@@ -380,10 +391,6 @@ uiwait(H);
             vars.selectedEvent = [];
             updateView;
         end
-        % To put focus back to main GUI
-        set(hObject, 'enable', 'off');
-        drawnow;
-        set(hObject, 'enable', 'on');
     end
 
     function keyPressHandler(~, eventData)
@@ -497,16 +504,22 @@ uiwait(H);
     end
 
     function channelView(hObject, ~)
-        tempEMG = vars.EMG;
-        tempEMG.events = vars.events;
-        plotEMG(tempEMG, vars.options);
         % To put focus back to main GUI
         set(hObject, 'enable', 'off');
         drawnow;
         set(hObject, 'enable', 'on');
+        
+        tempEMG = vars.EMG;
+        tempEMG.events = vars.events;
+        plotEMG(tempEMG, vars.options);
     end
 
     function scanOnsetsOffsets(hObject, ~)
+        % To put focus back to main GUI
+        set(hObject, 'enable', 'off');
+        drawnow;
+        set(hObject, 'enable', 'on');
+        
         if(vars.options.scanOnsetsOffsets)
             vars.options.scanOnsetsOffsets = 0;
             set(vars.btnScanOnsetsOffsets, 'String', 'Scan Offsets');
@@ -515,10 +528,6 @@ uiwait(H);
             set(vars.btnScanOnsetsOffsets, 'String', 'Scan Onsets');
         end
         eventScroll;
-        % To put focus back to main GUI
-        set(hObject, 'enable', 'off');
-        drawnow;
-        set(hObject, 'enable', 'on');
     end
 
     function updateView(retainZoom)
