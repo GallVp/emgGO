@@ -50,3 +50,4 @@ $ git clone https://github.com/GallVp/emgGO
 emgGO uses following third party libraries. The licenses for these libraries can be found next to source files in their respective libs/thirdpartlib folders.
 
 1. `energyop` Copyright (c) 2014, Hooman Sedghamiz. Source is available [here](https://au.mathworks.com/matlabcentral/fileexchange/45406-teager-keiser-energy-operator-vectorized).
+2. `PSOt` Copyright (c) 2005, Brian Birge. Source is available [here](https://au.mathworks.com/matlabcentral/fileexchange/7506-particle-swarm-optimization-toolbox).
