@@ -296,8 +296,18 @@ uiwait(H);
     end
 
     function autoTune(~, ~)
+        
+        dlgOpts.Interpreter='tex';
+        x = inputdlg({'Randomise parameters [Y:1, N:0]'},...
+            'nOptim', [1 50], {'0'}, dlgOpts);
+        if(isempty(x))
+            return;
+        end
+        answer = x;
+        isRandomParams = str2double(answer{1});
+        
         paramsVector = tuneDetectionParams(vars.channelStream(:, vars.channelNum), vars.fs,...
-            vars.detectionParams(:, vars.channelNum),...
+            isRandomParams, vars.detectionParams(:, vars.channelNum),...
             vars.options.paramLowerBounds, vars.options.paramUpperBounds,...
             vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM}, vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM},...
             vars.options.detectionAlgo);

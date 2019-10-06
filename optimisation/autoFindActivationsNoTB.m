@@ -23,19 +23,19 @@ swarmMatrix         = repmat(swarmMatrix, PARAM_MULTIPLIER*totalParams, 1);
 
 
 % Problem preparation
-PSOparams(1) = 1;
-PSOparams(2) = 100;
-PSOparams(3) = PARAM_MULTIPLIER*totalParams;
-PSOparams(4) = 2;
-PSOparams(5) = 2;
-PSOparams(6) = 0.9;
-PSOparams(7) = 0.4;
-PSOparams(8) = 1500;
-PSOparams(9) = 0.1;
-PSOparams(10) = 20;
-PSOparams(11) = 1-1e-3;
-PSOparams(12) = 1;
-PSOparams(13) = ~randomInit;
+PSOparams(1)        = 1;
+PSOparams(2)        = 100;
+PSOparams(3)        = PARAM_MULTIPLIER*totalParams;
+PSOparams(4)        = 2;
+PSOparams(5)        = 2;
+PSOparams(6)        = 0.9;
+PSOparams(7)        = 0.4;
+PSOparams(8)        = 1500;
+PSOparams(9)        = 0.1;
+PSOparams(10)       = 20;
+PSOparams(11)       = 0;
+PSOparams(12)       = 1;
+PSOparams(13)       = ~randomInit;
 
 % Run particle swarm optimiser, first pass
 [optOUT,~,~]= pso_Trelea_vectorized(f,totalParams,4,[lb ub], 0, PSOparams, 'psoStatus', swarmMatrix);
