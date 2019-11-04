@@ -137,7 +137,7 @@ vars.btnPreviousChannel = uicontrol('Style', 'pushbutton', 'String', '<<',...
     'Callback', @previousChannel);
 
 vars.btnReset = uicontrol('Style', 'pushbutton', 'String', 'Reset',...
-    'TooltipString', 'Reset events',...
+    'TooltipString', 'Reset events for selected channel',...
     'Position', [500 60 75 20],...
     'Callback', @reset);
 
@@ -371,7 +371,7 @@ uiwait(H);
         set(hObject, 'enable', 'on');
         
         if(~isempty(vars.highlightPoint))
-            vars.events(vars.channelNum).onSets = sort([vars.events(vars.channelNum).onSets;round(vars.highlightPoint(1) .* vars.fs)]);
+            vars.events(vars.channelNum).onSets = uniquetol(sort([vars.events(vars.channelNum).onSets;round(vars.highlightPoint(1) .* vars.fs)]));
             vars.numOnsets = length(vars.events(vars.channelNum).onSets);
             vars.highlightPoint = [];
             vars.selectedEvent = [];
@@ -385,7 +385,7 @@ uiwait(H);
         set(hObject, 'enable', 'on');
         
         if(~isempty(vars.highlightPoint))
-            vars.events(vars.channelNum).offSets = sort([vars.events(vars.channelNum).offSets;round(vars.highlightPoint(1) .* vars.fs)]);
+            vars.events(vars.channelNum).offSets = uniquetol(sort([vars.events(vars.channelNum).offSets;round(vars.highlightPoint(1) .* vars.fs)]));
             vars.numOffsets = length(vars.events(vars.channelNum).offSets);
             vars.highlightPoint = [];
             vars.selectedEvent = [];
