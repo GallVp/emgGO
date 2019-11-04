@@ -44,8 +44,10 @@ for i=1:size(multiChannel, 2)
     tau =  autoApplyActivations(multiChannel(:, i), fs, activationKernel, randomInit, initialTau,...
         lowerBound, upperBound);
     
-    onsets                      = activationKernel(:, 1)+tau;
-    offsets                     = activationKernel(:, 2)+tau;
+    tauSamples                  = round(tau*fs);
+    
+    onsets                      = activationKernel(:, 1)+tauSamples;
+    offsets                     = activationKernel(:, 2)+tauSamples;
     onsets(onsets<=1)           = 1;
     offsets(offsets<=1)         = 1;
     lChannel                    = length(multiChannel(:, i));
