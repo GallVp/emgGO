@@ -340,17 +340,19 @@ uiwait(H);
             runDetector(1);
         else
             activationKernel = [vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM}, vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM}];
-            activationMatrix =  autoApplyActivationsMulti(vars.channelStream, vars.fs, activationKernel);
-            
-            for i=1:vars.numChannels
-                if i == vars.channelNum
-                    continue;
-                end
-                if any(isnan(activationMatrix(:, 1, i))) || any(isnan(activationMatrix(:, 2, i)))
-                    continue;
-                else
-                    vars.detectionCellarray{i}{end, vars.ONSETS_COLUMN_NUM}     = activationMatrix(:, 1, i);
-                    vars.detectionCellarray{i}{end, vars.OFFSETS_COLUMN_NUM}    = activationMatrix(:, 2, i);
+            if ~isempty(activationKernel)
+                activationMatrix =  autoApplyActivationsMulti(vars.channelStream, vars.fs, activationKernel);
+                
+                for i=1:vars.numChannels
+                    if i == vars.channelNum
+                        continue;
+                    end
+                    if any(isnan(activationMatrix(:, 1, i))) || any(isnan(activationMatrix(:, 2, i)))
+                        continue;
+                    else
+                        vars.detectionCellarray{i}{end, vars.ONSETS_COLUMN_NUM}     = activationMatrix(:, 1, i);
+                        vars.detectionCellarray{i}{end, vars.OFFSETS_COLUMN_NUM}    = activationMatrix(:, 2, i);
+                    end
                 end
             end
         end

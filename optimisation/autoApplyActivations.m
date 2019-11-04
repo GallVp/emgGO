@@ -8,6 +8,15 @@ function tau =  autoApplyActivations(singleChannel, fs, activationKernel, random
 %   Licensed under the MIT License. See LICENSE in the project root for
 %   license information.
 
+
+
+if ~(exist("particleswarm", 'file') && exist("optimoptions", 'file') && exist("fmincon", 'file'))
+    tau =  autoApplyActivationsNoTB(singleChannel, fs, activationKernel, randomInit, initialTau,...
+    lowerBound, upperBound);
+    warning(sprintf('MATLAB optimisation functions were not found.\nA third party optimisation toolbox was used.\nResults may be better or worse as full testing has not been conducted.\nInstalling Global Optimisation Toolbox and Optimisation Toolbox may solve the problem.'));
+    return;
+end
+
 % Defaults
 PARAM_MULTIPLIER    = 3;
 

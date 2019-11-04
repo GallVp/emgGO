@@ -569,7 +569,9 @@ for i=1:me  % start epoch loop (iterations)
                 disp(['--> Solution likely, GBest hasn''t changed by at least ',...
                     num2str(ergrd),' for ',...
                     num2str(cnt2),' epochs.']);
-                haltingState = 1; % Added for exiting from outside <Usman Rashid, 5-Oct-2019>
+                if exist('haltingState', 'var')
+                    haltingState = 1; % Added for exiting from outside <Usman Rashid, 4-Nov-2019>
+                end
                 eval(plotfcn);
             end
             break
@@ -584,7 +586,9 @@ for i=1:me  % start epoch loop (iterations)
                 fprintf(message,i,gbestval);
                 disp(' ');
                 disp(['--> Error Goal reached, successful termination!']);
-                haltingState = 1; % Added for exiting from outside <Usman Rashid, 5-Oct-2019>
+                if exist('haltingState', 'var')
+                    haltingState = 1; % Added for exiting from outside <Usman Rashid, 4-Nov-2019>
+                end
                 eval(plotfcn);
             end
             break
@@ -598,7 +602,9 @@ for i=1:me  % start epoch loop (iterations)
                     fprintf(message,i,gbestval);
                     disp(' ');
                     disp(['--> Error Goal reached, successful termination!']);
-                    haltingState = 1; % Added for exiting from outside <Usman Rashid, 5-Oct-2019>
+                    if exist('haltingState', 'var')
+                        haltingState = 1; % Added for exiting from outside <Usman Rashid, 4-Nov-2019>
+                    end
                     eval(plotfcn);
                 end
                 break
@@ -611,12 +617,16 @@ for i=1:me  % start epoch loop (iterations)
     %     pbest = pbest - repmat(gbestoffset,ps,1);
     %     gbest = gbest + gbestoffset;
     
-    % Added for exiting from outside <Usman Rashid, 5-Oct-2019>
-    if haltingState
-        break;
+    % Added for exiting from outside <Usman Rashid, 4-Nov-2019>
+    if exist('haltingState', 'var')
+        if haltingState
+            break;
+        end
     end
     if i==me
-        haltingState = 1;
+        if exist('haltingState', 'var')
+            haltingState = 1;
+        end
         eval(plotfcn);
     end
     
