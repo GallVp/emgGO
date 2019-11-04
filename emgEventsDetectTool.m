@@ -201,7 +201,7 @@ vars.ckbShowFinal = uicontrol('Style','checkbox',...
 
 vars.btnLockParams = uicontrol('Style','pushbutton',...
     'String','Apply to all channels',...
-    'TooltipString', 'Apply parameters to all channels',...
+    'TooltipString', 'Apply to all channels',...
     'Position',[400 20 175 20],...
     'Callback', @applyParamsToAll,...
     'Enable', vars.ON_OFF_CELL{(vars.numChannels > 1) + 1});
@@ -327,8 +327,33 @@ uiwait(H);
     end
 
     function applyParamsToAll(~,~)
-        vars.detectionParams = repmat(vars.detectionParams(:, vars.channelNum), 1, vars.numChannels);
-        runDetector(1);
+        dlgOpts.Interpreter='tex';
+        x = inputdlg({'Apply parameters (P) or activations (A) [P:1, A:0]'},...
+            'Apply to all channels', [1 50], {'1'}, dlgOpts);
+        if(isempty(x))
+            return;
+        end
+        answer = x;
+        applyWhat = str2double(answer{1});
+        if applyWhat == 1
+            vars.detectionParams = repmat(vars.detectionParams(:, vars.channelNum), 1, vars.numChannels);
+            runDetector(1);
+        else
+            activationKernel = [vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM}, vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM}];
+            activationMatrix =  autoApplyActivationsMulti(vars.channelStream, vars.fs, activationKernel);
+            
+            for i=1:vars.numChannels
+                if i == vars.channelNum
+                    continue;
+                end
+                if any(isnan(activationMatrix(:, 1, i))) || any(isnan(activationMatrix(:, 2, i)))
+                    continue;
+                else
+                    vars.detectionCellarray{i}{end, vars.ONSETS_COLUMN_NUM}     = activationMatrix(:, 1, i);
+                    vars.detectionCellarray{i}{end, vars.OFFSETS_COLUMN_NUM}    = activationMatrix(:, 2, i);
+                end
+            end
+        end
     end
 
     function handleZoom(h, ~)
