@@ -13,14 +13,14 @@ emgGO (electromyography, graphics and optimisation) is a toolbox for offline mus
 
 ## Compatibility
 
-Currently emgGO is being developed on macOS Mojave, MATLAB 2017b.
+Currently emgGO is being developed on macOS Ventura, MATLAB 2022b. It is highly recommended to use MATLAB's Global Optimisation Toolbox and Parallel Computing Toolbox. In the absence of Global Optimisation Toolbox, a third party global optimisation algorithm is used which has not been fully tested. In the absence of Parallel Computing Toolbox, the optimisation algorithm uses a single core which results in significant speed reduction.
 
 ## Installation
 
 1. Clone the git repository using git. Or, download a compressed copy [here](https://codeload.github.com/GallVp/emgGO/zip/master).
 
 ```
-$ git clone https://github.com/GallVp/emgGO
+git clone https://github.com/GallVp/emgGO
 ```
 
 2. From MATLAB file explorer, enter the emgGO folder by double clicking it. Follow the [tutorials](https://github.com/GallVp/emgGO/tree/master/docs) to experiment with the sample data.
