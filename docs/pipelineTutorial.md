@@ -1,6 +1,6 @@
 # How to Create a Processing Pipeline?
 
-## Tutorials:
+## Tutorials
 
 <ul>
     <li>
@@ -101,46 +101,46 @@ fileData                = load(inputFileName);
 
 %% Process PF Epochs
 if(~isempty(fileData.Epoch.PF))
-    pfData                  = [fileData.Epoch.PF(1).Channel(CHANNEL_INFO_PF, :)...
+    pfData              = [fileData.Epoch.PF(1).Channel(CHANNEL_INFO_PF, :)...
         fileData.Epoch.PF(2).Channel(CHANNEL_INFO_PF, :)...
         fileData.Epoch.PF(3).Channel(CHANNEL_INFO_PF, :)];
     
-    EMG.channelData         = pfData';
+    EMG.channelData     = pfData';
     
-    pfDataProcessed         = emgEventsDetectTool(EMG, options);
+    pfDataProcessed     = emgEventsDetectTool(EMG, options);
 else
     pfDataProcessed     = [];
 end
 
 %% Process Cough Epochs
 if(~isempty(fileData.Epoch.Cough))
-    coughData               = [fileData.Epoch.Cough(1).Channel(CHANNEL_INFO_COUGH, :)...
+    coughData           = [fileData.Epoch.Cough(1).Channel(CHANNEL_INFO_COUGH, :)...
         fileData.Epoch.Cough(2).Channel(CHANNEL_INFO_COUGH, :)...
         fileData.Epoch.Cough(3).Channel(CHANNEL_INFO_COUGH, :)];
     
-    EMG.channelData         = coughData';
+    EMG.channelData     = coughData';
     
-    coughDataProcessed      = emgEventsDetectTool(EMG, options);
+    coughDataProcessed  = emgEventsDetectTool(EMG, options);
 else
-    coughDataProcessed      = [];
+    coughDataProcessed  = [];
 end
 
 %% Process Abd Epochs
 if(~isempty(fileData.Epoch.Abd))
-    abdData                 = [fileData.Epoch.Abd(1).Channel(CHANNEL_INFO_ABD, :)...
+    abdData             = [fileData.Epoch.Abd(1).Channel(CHANNEL_INFO_ABD, :)...
         fileData.Epoch.Abd(2).Channel(CHANNEL_INFO_ABD, :)...
         fileData.Epoch.Abd(3).Channel(CHANNEL_INFO_ABD, :)];
     
-    EMG.channelData         = abdData';
+    EMG.channelData     = abdData';
     
-    abdDataProcessed        = emgEventsDetectTool(EMG, options);
+    abdDataProcessed    = emgEventsDetectTool(EMG, options);
 else
-    abdDataProcessed        = [];
+    abdDataProcessed    = [];
 end
 
 %% Process FF Epochs
 if(~isempty(fileData.Epoch.FF))
-    ffData                	= [fileData.Epoch.FF(1).Channel(CHANNEL_INFO_FF, :)...
+    ffData              = [fileData.Epoch.FF(1).Channel(CHANNEL_INFO_FF, :)...
         fileData.Epoch.FF(2).Channel(CHANNEL_INFO_FF, :)...
         fileData.Epoch.FF(3).Channel(CHANNEL_INFO_FF, :)...
         fileData.Epoch.FF(4).Channel(CHANNEL_INFO_FF, :)...
@@ -151,19 +151,19 @@ if(~isempty(fileData.Epoch.FF))
         fileData.Epoch.FF(9).Channel(CHANNEL_INFO_FF, :)...
         fileData.Epoch.FF(10).Channel(CHANNEL_INFO_FF, :)];
     
-    EMG.channelData         = ffData';
+    EMG.channelData     = ffData';
     
-    ffDataProcessed         = emgEventsDetectTool(EMG, options);
+    ffDataProcessed     = emgEventsDetectTool(EMG, options);
 else
-    ffDataProcessed         = [];
+    ffDataProcessed     = [];
 end
 
 
 %% Pack output structure
-outData.pfData              = pfDataProcessed;
-outData.coughData           = coughDataProcessed;
-outData.abdData             = abdDataProcessed;
-outData.ffData              = ffDataProcessed;
+outData.pfData          = pfDataProcessed;
+outData.coughData       = coughDataProcessed;
+outData.abdData         = abdDataProcessed;
+outData.ffData          = ffDataProcessed;
 
 end
 ```
@@ -171,7 +171,7 @@ end
 ### An Example Edit Function
 
 ```MATLAB
-function outData = editFunc(inputFileName)
+function outData        = editFunc(inputFileName)
 
 %% Load file data
 fileData                = load(inputFileName);
@@ -180,7 +180,7 @@ options.subParams       = [0.2 5 1 0.004 0.1 0.5 5 0];
 %% Process PF Epochs
 if(~isempty(fileData.pfData))
     
-    pfDataProcessed         = emgEventsManageTool(fileData.pfData, options);
+    pfDataProcessed     = emgEventsManageTool(fileData.pfData, options);
 else
     pfDataProcessed     = [];
 end
@@ -188,33 +188,33 @@ end
 %% Process Cough Epochs
 if(~isempty(fileData.coughData))
     
-    coughDataProcessed      = emgEventsManageTool(fileData.coughData, options);
+    coughDataProcessed  = emgEventsManageTool(fileData.coughData, options);
 else
-    coughDataProcessed      = [];
+    coughDataProcessed  = [];
 end
 
 %% Process Abd Epochs
 if(~isempty(fileData.abdData))
     
-    abdDataProcessed        = emgEventsManageTool(fileData.abdData, options);
+    abdDataProcessed    = emgEventsManageTool(fileData.abdData, options);
 else
-    abdDataProcessed        = [];
+    abdDataProcessed    = [];
 end
 
 %% Process FF Epochs
 if(~isempty(fileData.ffData))
     
-    ffDataProcessed         = emgEventsManageTool(fileData.ffData, options);
+    ffDataProcessed     = emgEventsManageTool(fileData.ffData, options);
 else
-    ffDataProcessed         = [];
+    ffDataProcessed     = [];
 end
 
 
 %% Pack output structure
-outData.pfData              = pfDataProcessed;
-outData.coughData           = coughDataProcessed;
-outData.abdData             = abdDataProcessed;
-outData.ffData              = ffDataProcessed;
+outData.pfData          = pfDataProcessed;
+outData.coughData       = coughDataProcessed;
+outData.abdData         = abdDataProcessed;
+outData.ffData          = ffDataProcessed;
 
 end
 ```
