@@ -1,0 +1,3 @@
+[submodule "ecg-removal"]
+	path = ecg-removal
+	url = git@github.com:GallVp/ecg-removal.git
