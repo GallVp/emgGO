@@ -17,7 +17,7 @@ Currently emgGO is being developed on macOS Ventura, MATLAB 2022b. It is highly 
 
 ## Installation
 
-1. Clone the git repository using git. Or, download a compressed copy [here](https://codeload.github.com/GallVp/emgGO/zip/master).
+1. Clone the git repository using git for the latest developmental version. Or, download a compressed copy of the latest stable release [here](https://github.com/GallVp/emgGO/archive/refs/tags/v2.0.zip).
 
 ```
 git clone --recursive https://github.com/GallVp/emgGO
