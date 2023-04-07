@@ -79,10 +79,9 @@ end
 
 % Calculate abscissa from fs
 vars.abscissa         = (1:vars.numSamples) ./ vars.fs;
-vars.channelStream    = vars.EMG.channelData;
 
 
-vars.eventAmplitude   = (max(vars.channelStream) - min(vars.channelStream)) / 4;
+vars.eventAmplitude   = (max(vars.EMG.channelData) - min(vars.EMG.channelData)) / 4;
 
 % Initial settings
 vars.channelNum       = 1;
@@ -286,7 +285,7 @@ uiwait(H);
         answer = x;
         numActivations = round(str2double(answer{1}));
         isRandomParams = str2double(answer{2});
-        paramsVector = autoFindActivations(vars.channelStream(:, vars.channelNum), vars.fs,...
+        paramsVector = autoFindActivations(vars.EMG.channelData(:, vars.channelNum), vars.fs,...
             isRandomParams, vars.detectionParams(:, vars.channelNum),...
             vars.options.paramLowerBounds, vars.options.paramUpperBounds,...
             numActivations, vars.options.detectionAlgo);
@@ -306,7 +305,7 @@ uiwait(H);
         answer = x;
         isRandomParams = str2double(answer{1});
         
-        paramsVector = tuneDetectionParams(vars.channelStream(:, vars.channelNum), vars.fs,...
+        paramsVector = tuneDetectionParams(vars.EMG.channelData(:, vars.channelNum), vars.fs,...
             isRandomParams, vars.detectionParams(:, vars.channelNum),...
             vars.options.paramLowerBounds, vars.options.paramUpperBounds,...
             vars.detectionCellarray{vars.channelNum}{end, vars.ONSETS_COLUMN_NUM}, vars.detectionCellarray{vars.channelNum}{end, vars.OFFSETS_COLUMN_NUM},...
@@ -367,7 +366,7 @@ uiwait(H);
         end
         ax = subplot(1, 1, 1, 'Units', 'pixels');
         
-        dat = vars.channelStream(:, vars.channelNum);
+        dat = vars.EMG.channelData(:, vars.channelNum);
         
         absc = vars.abscissa;
         
@@ -455,11 +454,11 @@ uiwait(H);
         end
         if runForAll == 1
             for i = 1:vars.numChannels
-                vars.detectionCellarray{i} = vars.options.detectionAlgoSteps(vars.channelStream(:, i),...
+                vars.detectionCellarray{i} = vars.options.detectionAlgoSteps(vars.EMG.channelData(:, i),...
                     vars.fs, vars.detectionParams(:, i));
             end
         else
-            vars.detectionCellarray{vars.channelNum} = vars.options.detectionAlgoSteps(vars.channelStream(:, vars.channelNum),...
+            vars.detectionCellarray{vars.channelNum} = vars.options.detectionAlgoSteps(vars.EMG.channelData(:, vars.channelNum),...
                 vars.fs, vars.detectionParams(:, vars.channelNum));
         end
     end
